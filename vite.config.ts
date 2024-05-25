@@ -3,6 +3,8 @@ import honox from "honox/vite";
 import client from "honox/vite/client";
 import { defineConfig } from "vite";
 
+const entry = "./app/server.ts";
+
 export default defineConfig(({ mode }) => {
   if (mode === "client") {
     return {
@@ -11,6 +13,9 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    plugins: [honox({}), ssg()],
+    build: {
+      emptyOutDir: false,
+    },
+    plugins: [honox(), ssg({ entry })],
   };
 });
